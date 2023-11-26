@@ -1,10 +1,17 @@
-<app-navbar></app-navbar>
-<app-sidebar></app-sidebar>
+<app-navbar id="navbar" class="navbar navbar-dark fixed-top bg-dark"></app-navbar>
+
+
+<div class="container-fluid">
+  <div class="row" id="mainContent">
+    <app-sidebar id="sideBar" class="col-sm-3 cold-md-2 d-none d-sm-block sidebar"></app-sidebar>
+    <div class="cold-sm-9 ml-sm-auto col-md-10 pt-3" role="main" id="dashboard">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
 
 
 
 
 
 
-
-<router-outlet></router-outlet>
