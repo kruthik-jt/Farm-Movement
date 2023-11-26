@@ -9,6 +9,10 @@ export class SectionFarmrecordsComponent implements OnInit {
 
   constructor() { }
 
+  records: any = {
+
+  }
+
   ngOnInit(): void {
   }
 
