@@ -1,0 +1,6 @@
+frontend/tsconfig.app.json
+frontend/tsconfig.json
+frontend/tsconfig.spec.json
+frontend/.vscode/extensions.json
+frontend/.vscode/launch.json
+frontend/.vscode/tasks.json

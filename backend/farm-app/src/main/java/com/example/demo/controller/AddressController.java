@@ -21,5 +21,10 @@ public class AddressController {
     public List<Address> getAll() {
         return service.getAll();
     }
+    
+    @GetMapping("/states")
+    public List<String> getAllFarmStates() {
+    	return service.getAllFarmStates();
+    }
 }
 

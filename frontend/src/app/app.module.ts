@@ -14,6 +14,7 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { DonutChartComponent } from './charts/donut-chart/donut-chart.component';
 import { MapChartComponent } from './charts/map-chart/map-chart.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,9 +32,10 @@ import { MapChartComponent } from './charts/map-chart/map-chart.component';
     BrowserModule,
     ChartsModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

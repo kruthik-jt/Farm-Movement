@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartType } from 'chart.js';
-
+import { PieChartService } from './pie-chart.service';
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -8,10 +8,9 @@ import { ChartType } from 'chart.js';
 })
 export class PieChartComponent implements OnInit {
 
-  constructor() { }
-
-  pieChartData: number[] = [350, 450, 120]
-  pieChartLabels: string[] = ['FarmA', 'FarmB', 'FarmC']
+  pieChart: any;
+  pieChartData: number[] = [];
+  pieChartLabels: string[] = [];
   colors: any[] = [
     {
       backgroundColor: ['#26547c', "#ff6b6b", "#ffd166"]
@@ -19,8 +18,30 @@ export class PieChartComponent implements OnInit {
   ];
   pieChartType: ChartType = 'pie';
 
+  constructor(private pieChartService: PieChartService) { }
 
   ngOnInit(): void {
+    this.getFarmStatesData();
+  }
+
+  private getFarmStatesData() {
+    this.pieChartService.getFarmStatesData().subscribe(
+      (data) => {
+        this.pieChart = {}
+        for (let i=0;i<data.length;i++) {
+          if (data[i] in this.pieChart) {
+            this.pieChart[data[i]]+=1
+          } else {
+            this.pieChart[data[i]] = 1
+          }
+        }
+        this.pieChartData = Object.values(this.pieChart);
+        this.pieChartLabels = Object.keys(this.pieChart)
+      },
+      (error) => {
+        console.log("Error Fetching States of all the Farms")
+      }
+    )
   }
 
 }

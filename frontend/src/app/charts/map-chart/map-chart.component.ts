@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
+import { MapChartService } from './map-chart.service';
 
 
 @Component({
@@ -10,39 +11,46 @@ import * as L from 'leaflet';
 export class MapChartComponent implements OnInit {
 
   ngOnInit() {
-    this.createMap();
+    this.getMovementCoordinates();
   }
 
-  createMap() {
-    // Creating map options
+  constructor(private mapChartService: MapChartService) { }
+
+  private getMovementCoordinates() {
+    this.mapChartService.getMovementCoordinates().subscribe(
+      (data) => {
+        const latlang: L.LatLngExpression[][]=[]
+        for(let i=0; i<data.length; i++) {
+          const moveCoords = data[i].split(",");
+          latlang.push([
+            [parseFloat(moveCoords[0]), parseFloat(moveCoords[1])],
+            [parseFloat(moveCoords[2]), parseFloat(moveCoords[3])]
+          ])
+        }
+        this.createMap(latlang);
+      },
+      (error) => {
+        console.log("Error Fetching States of all the Farms")
+      }
+    )
+  }
+
+  createMap(latlang: L.LatLngExpression[] | L.LatLngExpression[][]) {
     const mapOptions: L.MapOptions = {
-      center: [16.506174, 80.648015],
-      zoom: 7,
+      center: [41.8781, -87.6298],
+      zoom: 4.5,
     };
 
-    // Creating a map object
     const map = L.map('map', mapOptions);
 
-    // Creating a Layer object
-    const layer = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    const layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png');
 
-    // Adding layer to the map
     map.addLayer(layer);
 
+    const multiPolyLineOptions: L.PolylineOptions = { color: 'pink' };
 
-    // Creating latlng object
-    const latlang:L.LatLngExpression[][] = [
-      [[17.385044, 78.486671], [16.506174, 80.648015], [17.686816, 83.218482]],
-      [[13.082680, 80.270718], [12.971599, 77.594563],[15.828126, 78.037279]]
-    ];
-
-    // Creating poly line options
-    const multiPolyLineOptions: L.PolylineOptions = { color: 'red' };
-
-    // Creating multi poly-lines
     const multipolyline = L.polyline(latlang, multiPolyLineOptions);
 
-    // Adding multi poly-line to map
     multipolyline.addTo(map);
   }
 

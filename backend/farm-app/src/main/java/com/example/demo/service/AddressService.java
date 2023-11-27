@@ -17,5 +17,9 @@ public class AddressService {
     public List<Address> getAll() {
         return repository.findAll();
     }
+    
+    public List<String> getAllFarmStates() {
+    	return repository.getAllFarmStates();
+    }
 }
 
