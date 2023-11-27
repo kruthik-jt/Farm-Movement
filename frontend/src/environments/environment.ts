@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   movementUrl: 'http://localhost:8080/api/movement/',
-  addressUrl: 'http://localhost:8080/api/address/'
+  addressUrl: 'http://localhost:8080/api/address/',
+  farmUrl: 'http://localhost:8080/api/farm/'
 };
 
 /*

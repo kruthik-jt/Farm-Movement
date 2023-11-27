@@ -17,4 +17,8 @@ public class FarmService {
     public List<Farm> getAll() {
         return repository.findAll();
     }
+    
+    public List<Object> getFarmRecords() {
+    	return repository.getFarmRecords();
+    }
 }

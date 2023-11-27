@@ -21,5 +21,10 @@ public class FarmController {
     public List<Farm> getAll() {
         return service.getAll();
     }
+    
+    @GetMapping("/records")
+    public List<Object> getFarmRecords() {
+    	return service.getFarmRecords();
+    }
 }
 
