@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   movementUrl: 'http://localhost:8080/api/movement/',
   addressUrl: 'http://localhost:8080/api/address/',
   farmUrl: 'http://localhost:8080/api/farm/'

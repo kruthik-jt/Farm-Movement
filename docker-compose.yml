@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  app-server:
+    build:
+      context: farm-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/farm_database?createDatabaseIfNotExists=true&autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - backend
+      - frontend
+      
+  app-client:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: http://127.0.0.1:8080/
+    ports:
+      - ":8080"
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend
+      
+  db:
+    image: mysql:8.0
+    ports:
+      - ":3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: farm_database
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    networks:
+      - backend
+      
+networks:
+  backend:
+  frontend:    
