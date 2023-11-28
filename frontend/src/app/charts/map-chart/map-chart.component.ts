@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { MapChartService } from './map-chart.service';
+import 'leaflet-polylinedecorator';
 
 
 @Component({
@@ -51,6 +52,23 @@ export class MapChartComponent implements OnInit {
 
     const multipolyline = L.polyline(latlang, multiPolyLineOptions);
 
+    const arrowOptions = {
+      patterns: [
+        {
+          offset: 25,
+          repeat: 50,
+          symbol: L.Symbol.arrowHead({
+            pixelSize: 15,
+            polygon: false,
+            pathOptions: { color: 'pink' }
+          })
+        }
+      ]
+    };
+
+    const arrDecorator = L.polylineDecorator(multipolyline, arrowOptions);
+
+    arrDecorator.addTo(map);
     multipolyline.addTo(map);
   }
 
