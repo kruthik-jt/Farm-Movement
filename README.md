@@ -18,3 +18,7 @@ A Project to visualize the movement of animals between farms.
 
 3. Farm records showing the number of animals in the farm currently
 ![farmMovement_3](https://github.com/kruthik-jt/Farm-Movement/assets/36992052/be5c0eaf-b6d0-4bcb-8197-98dbeed691a3)
+
+## Recording
+https://github.com/kruthik-jt/Farm-Movement/assets/36992052/c2df1478-837e-4374-9e09-8022aff5e4d0
+
